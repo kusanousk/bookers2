@@ -1,9 +1,9 @@
 class BookCommentsController < ApplicationController
   def create
     book = Book.find(params[:book_id])
-    comment = book.book_comments.new(book_comment_params)
-    comment.user_id = current_user.id
-    comment.save
+    book_comment = book.book_comments.new(book_comment_params)
+    book_comment.user_id = current_user.id
+    flash[:comment_error] = "コメントが空です。" unless book_comment.save
     redirect_back fallback_location: book_path(book)
   end
 
