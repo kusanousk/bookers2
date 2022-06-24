@@ -17,9 +17,22 @@
 	  <th><%= user.followers.count %></th>
   </tr>
 </table>
-　
-<div class='row'>
-  <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block edit_user_#{user.id}" do %>
-    <i class="fas fa-user-cog"></i>
+
+<% if user == current_user %>
+  <div class='row'>
+    <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block edit_user_#{user.id}" do %>
+      <i class="fas fa-user-cog"></i>
+    <% end %>
+  </div>
+<% end %>
+
+<% if user != current_user %>
+  <% if current_user.follows.include?(user) %>
+    フォローを外す
+  <% else %>
+    <%= form_with model: current_user.relationships_for_followed.new do |f| %>
+      <%= f.hidden_field :followed_id, :value => user.id %>
+      <%= f.submit "フォローする", class: "btn btn-success" %>
+    <% end %>
   <% end %>
-</div>
+<% end %>
