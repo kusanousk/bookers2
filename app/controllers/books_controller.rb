@@ -8,7 +8,16 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.all
+    sort = params.fetch(:sort, "new")
+    case sort
+    when "new"
+      order = { id: "DESC" }
+    when "rate"
+      order = { rate: "DESC" }
+    else
+    end
+
+    @books = Book.all.order(order)
     @book = Book.new
   end
 
