@@ -1,6 +1,12 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!, except: [:top, :about]
+  before_action :authenticate_user!, except: %i[top about]
   before_action :configure_permitted_parameters, if: :devise_controller?
+
+  protected
+
+  def not_found
+    raise ActionController::RoutingError.new("Not Found")
+  end
 
   private
 

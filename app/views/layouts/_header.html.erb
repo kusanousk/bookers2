@@ -54,4 +54,35 @@
       </div>
     </div>
   </nav>
+
+  <% if user_signed_in? %>
+    <div class="container">
+      <div class="my-1">
+        <form action="<%= search_path %>">
+          <div class="form-row">
+            <div class="col">
+              <input type="text" name="word" class="form-control">
+            </div>
+            <div class="col">
+              <select name="target" class="form-control">
+                <option value="user">User</option>
+                <option value="book">Book</option>
+              </select>
+            </div>
+            <div class="col">
+              <select name="type" class="form-control">
+                <option value="perfect">完全一致</option>
+                <option value="forward">前方一致</option>
+                <option value="backward">後方一致</option>
+                <option value="partial">部分一致</option>
+              </select>
+            </div>
+            <div class="col">
+              <button class="btn btn-secondary" type="submit">検索</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  <% end %>
 </header>
