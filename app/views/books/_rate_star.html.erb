@@ -1,0 +1,5 @@
+<div style="color: orange;">
+  <% if book.rate.present? %>
+    <%== '<i class="fas fa-star"></i>' * book.rate %><%== '<i class="far fa-star"></i>' * (5 - book.rate) %>
+  <% end %>
+</div>
