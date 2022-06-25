@@ -1,5 +1,7 @@
 class SearchsController < ApplicationController
   def search
+    return book_tag_search(params[:tag]) if params.has_key?(:tag)
+
     @target = params[:target]
 
     case @target
@@ -13,6 +15,11 @@ class SearchsController < ApplicationController
   end
 
   private
+
+  def book_tag_search(tag)
+    @target = "book"
+    @items = Book.where(tag: params[:tag])
+  end
 
   def like(word, type)
     case type

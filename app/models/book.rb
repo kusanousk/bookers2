@@ -6,6 +6,7 @@ class Book < ApplicationRecord
   validates :title, presence: true
   validates :body, presence: true, length: { maximum: 200 }
   validates :rate, presence: true, numericality: { in: 1..5 }, on: :create
+  validates :tag, presence: true
   validate :rate_not_changed, on: :update
 
   def favorited_by?(user)
